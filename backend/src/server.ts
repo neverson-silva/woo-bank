@@ -7,8 +7,6 @@ import { useJWT } from '@graphql-yoga/plugin-jwt'
 
 const app = new Koa()
 
-console.log('Secret key', process.env.JWT_SECRET_KEY!.trim())
-
 const yoga = createYoga<Koa.ParameterizedContext>({
   schema: createSchema(schema),
   landingPage: false,
