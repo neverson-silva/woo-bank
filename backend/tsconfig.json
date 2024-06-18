@@ -1,0 +1,19 @@
+{
+    "compilerOptions": {
+      "target": "es2022",
+      "module": "NodeNext",
+      "outDir": "./dist",
+      "moduleResolution": "nodenext",
+      "esModuleInterop": true,
+      "allowSyntheticDefaultImports": true,
+      "strict": true,
+      "forceConsistentCasingInFileNames": true,
+      "baseUrl": ".",
+      "paths": {
+        "@/*": ["src/*"]
+      }
+    },
+    "include": ["src/**/*"],
+    "exclude": ["node_modules", "**/*.spec.ts"]
+  }
+  
