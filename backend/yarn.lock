@@ -547,6 +547,19 @@
   resolved "https://registry.yarnpkg.com/@sindresorhus/is/-/is-4.6.0.tgz#3c7c9c46e678feefe7a2e5bb609d3dbd665ffb3f"
   integrity sha512-t09vSN3MdfsyCHoFcTRCH/iUtG7OJ0CsjzB8cjAmKc/va/kIgeDI/TxsigdncE/4be734m0cvIYwNaV4i2XqAw==
 
+"@swc/cli@^0.1.26":
+  version "0.1.65"
+  resolved "https://registry.yarnpkg.com/@swc/cli/-/cli-0.1.65.tgz#bb51ce6f088a78ac99a07507c15a8d74c9336ecb"
+  integrity sha512-4NcgsvJVHhA7trDnMmkGLLvWMHu2kSy+qHx6QwRhhJhdiYdNUrhdp+ERxen73sYtaeEOYeLJcWrQ60nzKi6rpg==
+  dependencies:
+    "@mole-inc/bin-wrapper" "^8.0.1"
+    commander "^7.1.0"
+    fast-glob "^3.2.5"
+    minimatch "^9.0.3"
+    semver "^7.3.8"
+    slash "3.0.0"
+    source-map "^0.7.3"
+
 "@swc/cli@^0.3.9":
   version "0.3.12"
   resolved "https://registry.yarnpkg.com/@swc/cli/-/cli-0.3.12.tgz#0c083946989d55c83a5bffdb73273a1756f7fd4b"
@@ -612,7 +625,7 @@
   resolved "https://registry.yarnpkg.com/@swc/core-win32-x64-msvc/-/core-win32-x64-msvc-1.6.1.tgz#b2082710bc46c484a2c9f2e33a15973806e5031d"
   integrity sha512-0dLdTLd+ONve8kgC5T6VQ2Y5G+OZ7y0ujjapnK66wpvCBM6BKYGdT/OKhZKZydrC5gUKaxFN6Y5oOt9JOFUrOQ==
 
-"@swc/core@^1.4.7":
+"@swc/core@^1.2.12", "@swc/core@^1.4.7":
   version "1.6.1"
   resolved "https://registry.yarnpkg.com/@swc/core/-/core-1.6.1.tgz#a899a205cfaa8e23f805451ef4787987e03b8920"
   integrity sha512-Yz5uj5hNZpS5brLtBvKY0L4s2tBAbQ4TjmW8xF1EC3YLFxQRrUjMP49Zm1kp/KYyYvTkSaG48Ffj2YWLu9nChw==
@@ -1487,6 +1500,11 @@ color-support@^1.1.2:
   version "1.1.3"
   resolved "https://registry.yarnpkg.com/color-support/-/color-support-1.1.3.tgz#93834379a1cc9a0c61f82f52f0d04322251bd5a2"
   integrity sha512-qiBjkpbMLO/HL68y+lh4q0/O1MZFj2RX6X/KmMa3+gJD3z+WwI1ZzDHysvqHGS3mP6mznPckpXmw1nI9cJjyRg==
+
+commander@^7.1.0:
+  version "7.2.0"
+  resolved "https://registry.yarnpkg.com/commander/-/commander-7.2.0.tgz#a36cb57d0b501ce108e4d20559a150a391d97ab7"
+  integrity sha512-QrWXB+ZQSVPmIWIhtEO9H+gwHaMGYiF5ChvoJ+K9ZGHG/sVsa6yiesAD1GC/x46sET00Xlwo1u49RVVVzvcSkw==
 
 commander@^8.3.0:
   version "8.3.0"
@@ -4404,6 +4422,14 @@ supports-preserve-symlinks-flag@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/supports-preserve-symlinks-flag/-/supports-preserve-symlinks-flag-1.0.0.tgz#6eda4bd344a3c94aea376d4cc31bc77311039e09"
   integrity sha512-ot0WnXS9fgdkgIcePe6RHNk1WA8+muPa6cSjeR3V8K27q9BB1rTE3R1p7Hv0z1ZyAc8s6Vvv8DIyWf681MAt0w==
+
+swc@^1.0.11:
+  version "1.0.11"
+  resolved "https://registry.yarnpkg.com/swc/-/swc-1.0.11.tgz#3603db6d235115b9fc2d1e70aaa48a1034e38754"
+  integrity sha512-YbG4eija7g/ajQ0lu4P2WPgKt5zCm743VgKn+buBrXXo1IETftO2r/8VdBPhv8wpTyg3CO+VU1z2wHuL4iohmw==
+  dependencies:
+    "@swc/cli" "^0.1.26"
+    "@swc/core" "^1.2.12"
 
 synckit@^0.8.6:
   version "0.8.8"
