@@ -28,6 +28,6 @@ app.use(async (ctx) => {
   ctx.body = response.body
 })
 
-app.listen(process.env.port || 4000, () => {
+app.listen(process.env.PORT || 4000, () => {
   console.log(`Running a GraphQL API server at http://localhost:4000/${yoga.graphqlEndpoint}`)
 })
