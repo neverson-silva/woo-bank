@@ -23,7 +23,7 @@ interface AuthContextType {
 
 const PUBLIC_PAGES = ['/register', '/login']
 
-const AuthContext = createContext<AuthContextType | undefined>(undefined)
+export const AuthContext = createContext<AuthContextType | undefined>(undefined)
 
 export const AuthProvider: React.FC<PropsWithChildren> = ({ children }) => {
   const [user, setUser] = useState<IUser | null>(null)

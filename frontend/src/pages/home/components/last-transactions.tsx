@@ -3,13 +3,10 @@ import { ColumnDef, flexRender, getCoreRowModel, useReactTable } from '@tanstack
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table'
 import { Card, CardContent, CardHeader } from '@/components/ui/card'
 import { cn, formatDollarMoney } from '@/lib/utils'
-import { useLazyLoadQuery } from 'react-relay'
-import { GetUserTransactionsQuery } from '@/graphql/queries/getUserTransactionsQuery'
-import { useDashboardStore } from '@/hooks/useDashboardStore'
-import { useAuth } from '@/components/authentication-provider'
+import { IUser, useAuth } from '@/components/authentication-provider'
 import dayjs from 'dayjs'
 
-export type Payment = {
+export type Transaction = {
   id: string
   amount: number
   receiver: string
@@ -17,7 +14,7 @@ export type Payment = {
   type: 'Credit' | 'Debit'
 }
 
-export const columns: ColumnDef<Payment>[] = [
+export const columns: ColumnDef<Transaction>[] = [
   {
     accessorKey: 'createdAt',
     header: 'Date',
@@ -56,19 +53,23 @@ export const columns: ColumnDef<Payment>[] = [
   },
 ]
 
-export const LastTransactions = () => {
-  const updateAll = useDashboardStore((state) => state.updateAll)
+type LastTransactionsProps = {
+  userTransactions: Array<{
+    id: string
+    value: number
+    receiver: {
+      accountNumber: string
+      user: IUser
+    }
+    sender: {
+      accountNumber: string
+      user: IUser
+    }
+    createdAt: string
+  }>
+}
+export const LastTransactions = ({ userTransactions }: LastTransactionsProps) => {
   const { user } = useAuth()
-
-  // @ts-expect-error error is expected
-  const { getUserTransactions: userTransactions } = useLazyLoadQuery(
-    GetUserTransactionsQuery,
-    {},
-    {
-      fetchPolicy: 'network-only',
-      fetchKey: `get-transactions-${updateAll.toString()}`,
-    },
-  )
 
   const table = useReactTable({
     data: userTransactions?.map((transaction: any) => ({
@@ -82,7 +83,7 @@ export const LastTransactions = () => {
           ? 'Debit'
           : 'Credit',
     })),
-    columns,
+    columns: columns as any,
     getCoreRowModel: getCoreRowModel(),
   })
 

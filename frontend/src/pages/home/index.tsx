@@ -22,11 +22,33 @@ import {
   Legend,
   ResponsiveContainer,
 } from 'recharts'
+import { useDashboardStore } from '@/hooks/useDashboardStore.ts'
+import { useLazyLoadQuery } from 'react-relay'
+import { AccountDetailsQuery } from '@/graphql/queries/accountDetailsQuery.ts'
+import { GetUserTransactionsQuery } from '@/graphql/queries/getUserTransactionsQuery.ts'
 
 export const HomePage = () => {
   const { logout, user } = useAuth()
 
   const { isMobile } = useDevice()
+
+  const updateAll = useDashboardStore((state) => state.updateAll)
+
+  const { accountDetails } = useLazyLoadQuery(
+    AccountDetailsQuery,
+    {},
+    { fetchPolicy: 'network-only', fetchKey: updateAll.toString() },
+  ) as any
+
+  // @ts-expect-error error is expected
+  const { getUserTransactions: userTransactions } = useLazyLoadQuery(
+    GetUserTransactionsQuery,
+    {},
+    {
+      fetchPolicy: 'network-only',
+      fetchKey: `get-transactions-${updateAll.toString()}`,
+    },
+  )
 
   const mockData = [
     {
@@ -90,7 +112,7 @@ export const HomePage = () => {
           </div>
           <div className="grid grid-cols-1 md:grid-cols-12 md:gap-4 gap-6 mb-8">
             <div className="md:col-span-5 ">
-              <Balance />
+              <Balance accountDetails={accountDetails} />
               {!isMobile && <QuickTransfer className="mt-4" />}
             </div>
             {isMobile && <QuickTransfer />}
@@ -123,13 +145,13 @@ export const HomePage = () => {
             )}
             {isMobile && (
               <div>
-                <LastTransactions />
+                <LastTransactions userTransactions={userTransactions} />
               </div>
             )}
           </div>
           {!isMobile && (
             <div>
-              <LastTransactions />
+              <LastTransactions userTransactions={userTransactions} />
             </div>
           )}
         </div>
