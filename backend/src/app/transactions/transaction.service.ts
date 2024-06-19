@@ -37,6 +37,7 @@ export const sendTransaction = async ({
   const existentTransaction = await Transaction.findOne({ idempotencyKey })
     .populate('sender', 'accountNumber')
     .populate('receiver', 'accountNumber')
+    .exec()
 
   if (existentTransaction) {
     return existentTransaction

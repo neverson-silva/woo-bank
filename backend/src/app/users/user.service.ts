@@ -7,7 +7,7 @@ import * as bcrypt from 'bcrypt'
 import { User } from '@/app/users/user'
 import { Account } from '@/app/accounts/account'
 
-const expirationTime = 600000 // 10 minutos
+const expirationTime = 172800000 // 2 dias
 
 export const generateAuthToken = (
   accountDetails: Partial<PromiseReturnType<typeof AccountService.getAccountDetails>>,

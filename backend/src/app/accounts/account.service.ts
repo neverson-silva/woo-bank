@@ -8,9 +8,10 @@ const getAccountBalance = async (account: IAccount): Promise<number> => {
   })
     .populate('sender', 'accountNumber')
     .populate('receiver', 'accountNumber')
+    .exec()
 
-  return transactions.reduce((acc, transaction) => {
-    if (transaction.sender.accountNumber === account.accountNumber) {
+  return transactions?.reduce((acc, transaction) => {
+    if (transaction?.sender?.accountNumber === account.accountNumber) {
       return Number(acc) - Number(transaction.value)
     } else {
       return Number(acc) + Number(transaction.value)
@@ -27,7 +28,9 @@ const getAccountDetails = async (
 } | null> => {
   const account = await Account.findOne({
     accountNumber,
-  }).populate('user', 'id firstName')
+  })
+    .populate('user', 'id firstName')
+    .exec()
 
   if (!account) {
     return null
