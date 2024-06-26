@@ -27,7 +27,7 @@ This project is a solution for the Woovi Challenge, which involves building a si
 - Relay
 
 ### Testing
-- Jest
+- Vitest
 
 ## Features
 
