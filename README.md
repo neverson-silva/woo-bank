@@ -2,17 +2,6 @@
 
 This project is a solution for the Woovi Challenge, which involves building a simple CRUD (Create, Read, Update, Delete) application for a bank. The implementation utilizes the specified stack and technologies, closely mirroring day-to-day operations at Woovi.
 
-## Table of Contents
-
-- [Overview](#overview)
-- [Stack](#stack)
-- [Features](#features)
-- [Installation](#installation)
-- [Usage](#usage)
-- [API Documentation](#api-documentation)
-- [Testing](#testing)
-- [Contributing](#contributing)
-- [License](#license)
 
 ## Stack
 
