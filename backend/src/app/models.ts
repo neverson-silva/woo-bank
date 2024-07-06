@@ -18,6 +18,7 @@ export interface ITransaction extends Document {
   receiver: IAccount
   value: number
   idempotencyKey: string
+  hash: string
   createdAt: Date
 }
 
@@ -44,6 +45,7 @@ const TransactionSchema: Schema = new Schema({
   sender: { type: mongoose.Schema.Types.ObjectId, ref: 'accounts', required: true },
   receiver: { type: mongoose.Schema.Types.ObjectId, ref: 'accounts', required: true },
   idempotencyKey: { type: String, default: () => uuid() },
+  hash: { type: String },
   createdAt: { type: Date, default: Date.now },
 })
 

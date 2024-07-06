@@ -4,7 +4,7 @@ import { Transaction } from '@/app/transactions/transaction'
 import { SendTransactionType } from '@/app/transactions/types'
 import { AppException } from '@/infra/exceptions/app.exception'
 import mongoose from 'mongoose'
-import { v4 as uuid } from 'uuid'
+import * as crypto from 'node:crypto'
 
 export const sendTransaction = async ({
   value,
@@ -13,6 +13,10 @@ export const sendTransaction = async ({
   idempotencyKey,
   userId,
 }: SendTransactionType) => {
+  if (!idempotencyKey) {
+    throw new AppException('Please provide an idempotency key')
+  }
+
   const originAccount = await Account.findOne({
     accountNumber: senderAccountNumber,
     user: userId,
@@ -30,17 +34,28 @@ export const sendTransaction = async ({
     throw new AppException('Invalid accounts')
   }
 
-  if (!idempotencyKey) {
-    idempotencyKey = uuid()
-  }
+  const hash = crypto
+    .createHash('sha256')
+    .update(
+      JSON.stringify({
+        value,
+        senderAccountNumber: originAccount.accountNumber,
+        receiverTaxId: destinationAccount.accountNumber,
+        idempotencyKey,
+        userId,
+      }),
+    )
+    .digest('hex')
 
   const existentTransaction = await Transaction.findOne({ idempotencyKey })
     .populate('sender', 'accountNumber')
     .populate('receiver', 'accountNumber')
     .exec()
 
-  if (existentTransaction) {
+  if (existentTransaction && existentTransaction.hash === hash) {
     return existentTransaction
+  } else if (existentTransaction) {
+    throw new AppException('Transaction already exists')
   }
 
   const transaction = new Transaction({
@@ -48,6 +63,7 @@ export const sendTransaction = async ({
     receiver: destinationAccount,
     value,
     idempotencyKey,
+    hash,
   })
 
   await transaction.save()
