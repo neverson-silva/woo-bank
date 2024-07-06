@@ -4,11 +4,13 @@ import { LoginPage } from '@/pages/auth/login'
 import { AuthLayout } from './pages/auth'
 import { RegisterPage } from './pages/auth/register'
 import { HomePage } from '@/pages/home'
+import { DefaultError } from '@/components/ui/default-error'
 
 export const router = createBrowserRouter([
   {
     path: '/',
     element: <App />,
+    errorElement: <DefaultError />,
     children: [
       {
         path: '/home',
